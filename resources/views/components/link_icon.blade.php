@@ -1,6 +1,6 @@
 <div class="link-icon-container" >
-    <a href="">
-        <i class="fas fa-lock"></i>
-        <h4>Teste</h4>
+    <a href="{{$url}}" id="{{$id}}">
+        {{$slot}}
+        <h4>{{$titulo}}</h4>
     </a>
 </div>

@@ -1557,8 +1557,6 @@ td {
   top: 0;
 }
 
-/*******************************************FIM MEU CSS************************************************/
-
 /********************************************LAYOUTS************************************************/
 
 div.default-container {
@@ -1568,20 +1566,19 @@ div.default-container {
   justify-content: space-evenly;
 }
 
-/********************************************FIM LAYOUTS************************************************/
-
 /********************************************COMPONENTS************************************************/
 
 /**********************Link icon*************************/
 
 div.link-icon-container {
-  width: 120px;
-  height: 120px;
+  min-width: 120px;
+  min-height: 120px;
 }
 
 div.link-icon-container a {
   width: 100%;
   height: 100%;
+  padding: 6px 15px;
   border: 0.1px solid gray;
   margin-top: 10px;
   display: flex;
@@ -1602,13 +1599,16 @@ div.link-icon-container a i {
 div.link-icon-container a:hover {
   background-color: #f13737;
   color: white;
-  transition: 0.3s;
-  transition-timing-function: ease-in;
+  box-shadow: none;
+  border: none;
+}
+
+div.link-icon-container a.atual-page {
+  background-color: #f13737;
+  color: white;
   box-shadow: none;
   border: none;
 }
 
 /**********************FimLink icon*************************/
-
-/********************************************FIM COMPONENTS************************************************/
 

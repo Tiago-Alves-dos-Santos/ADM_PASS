@@ -9,7 +9,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.pages.index')
-        ->extends('layouts.default')
+        ->extends('layouts.default', ['pageId' => 'contas'])
         ->section('defaultPage');
     }
 }
