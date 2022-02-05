@@ -7,7 +7,7 @@
             @component('components.link_icon', ['url' => '', 'titulo' => 'Contas', 'id' => 'contas'])
                 <i class="fas fa-address-book"></i>
             @endcomponent
-            @component('components.link_icon', ['url' => '', 'titulo' => 'Categorias','id' => 'categoria'])
+            @component('components.link_icon', ['url' => '', 'titulo' => 'Plataformas','id' => 'categoria'])
                 <i class="fas fa-clipboard-list"></i>
             @endcomponent
             {{-- @component('components.link_icon', ['url' => '', 'titulo' => 'Vincular', 'id' => 'vincular'])

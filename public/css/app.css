@@ -1565,14 +1565,24 @@ table.myTable th {
   color: white;
 }
 
-table.myTable tbody tr:hover,
-table.myTable tbody tr.selecionado {
+table.myTable tbody tr {
   cursor: pointer;
+}
+
+table.myTable tbody tr:hover {
   color: white;
   background-color: #db0f0f;
 }
 
-table.myTable tbody tr:hover td,
+table.myTable tbody tr:hover td {
+  border: none;
+}
+
+table.myTable tbody tr.selecionado {
+  color: white;
+  background-color: #006eff;
+}
+
 table.myTable tbody tr.selecionado td {
   border: none;
 }

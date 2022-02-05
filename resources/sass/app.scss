@@ -34,12 +34,23 @@ table.myTable{
     background-color:$cor-aplicacao;
     color:white;
   }
-  tbody tr:hover, tbody tr.selecionado{
-    cursor: pointer;
-    color:white;
-    background-color: darken($cor-aplicacao, 12%);
-    td{
-      border:none;
+  tbody{
+    tr{
+      cursor: pointer;
+      &:hover{
+        color:white;
+        background-color: darken($cor-aplicacao, 12%);
+        td{
+          border:none;
+        }
+      }
+    }
+    tr.selecionado{
+      color:white;
+      background-color: rgb(0, 110, 255);
+      td{
+        border:none;
+      }
     }
   }
 }

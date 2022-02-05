@@ -18,7 +18,7 @@
             </thead>
             <tbody>
                 @for ($i=0; $i < 40; $i++)
-                <tr>
+                <tr wire:click='marcarLinha({{$i}})' id="{{$i}}">
                     <td>teste@email.com</td>
                     <td>12345</td>
                     <td>PAGSEGURO</td>
@@ -31,4 +31,15 @@
         </table>
     </div>
     {{-- Paginação --}}
+
+    <script>
+        $(function(){
+            let id_selecionado = 0;
+            Livewire.on('evt.marcarLinha', (id_linha) => {
+                $('tr').removeClass('selecionado');
+                $("tr#"+id_linha).addClass('selecionado');
+                id_selecionado = id_linha;
+            })
+        });
+    </script>
 </div>
