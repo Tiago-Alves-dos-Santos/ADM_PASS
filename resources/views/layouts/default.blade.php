@@ -10,9 +10,9 @@
             @component('components.link_icon', ['url' => '', 'titulo' => 'Categorias','id' => 'categoria'])
                 <i class="fas fa-clipboard-list"></i>
             @endcomponent
-            @component('components.link_icon', ['url' => '', 'titulo' => 'Vincular', 'id' => 'vincular'])
+            {{-- @component('components.link_icon', ['url' => '', 'titulo' => 'Vincular', 'id' => 'vincular'])
                 <i class="fas fa-link"></i>
-            @endcomponent
+            @endcomponent --}}
             
         </div>
     </div>

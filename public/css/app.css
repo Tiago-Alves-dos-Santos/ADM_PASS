@@ -1535,26 +1535,46 @@ div {
   box-sizing: border-box;
 }
 
-table {
-  border-collapse: collapse;
+/***********************TABELA*****************************/
+
+.height-table {
+  height: 435px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+table.myTable {
   width: 100%;
 }
 
-th,
-td {
-  background: #fff;
-  padding: 8px 16px;
+table.myTable th,
+table.myTable td {
+  border: 0.5px solid gray;
+  text-align: center;
 }
 
-.tableFixHead {
-  overflow: auto;
-  height: 100px;
-}
-
-.tableFixHead thead th {
+table.myTable th {
   position: -webkit-sticky;
   position: sticky;
+  border: none;
   top: 0;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 10px 10px;
+  background-color: #f13737;
+  color: white;
+}
+
+table.myTable tbody tr:hover,
+table.myTable tbody tr.selecionado {
+  cursor: pointer;
+  color: white;
+  background-color: #db0f0f;
+}
+
+table.myTable tbody tr:hover td,
+table.myTable tbody tr.selecionado td {
+  border: none;
 }
 
 /********************************************LAYOUTS************************************************/
@@ -1563,7 +1583,7 @@ div.default-container {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 /********************************************COMPONENTS************************************************/
@@ -1580,7 +1600,7 @@ div.link-icon-container a {
   height: 100%;
   padding: 6px 15px;
   border: 0.1px solid gray;
-  margin-top: 10px;
+  margin: 10px 10px 0px 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1611,4 +1631,43 @@ div.link-icon-container a.atual-page {
 }
 
 /**********************FimLink icon*************************/
+
+/********************************************livewire************************************************/
+
+/******************COMPONENT - CONTA -TABLE***********************/
+
+div.conta-container-acoes {
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+div.conta-container-acoes div.acoes {
+  box-sizing: border-box;
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f13737;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  z-index: 4;
+  top: 0px;
+}
+
+div.conta-container-acoes div.acoes a {
+  text-decoration: none;
+  color: white;
+  margin: 0px 5px;
+  padding: 3px;
+}
+
+div.conta-container-acoes div.acoes a:hover {
+  background-color: white;
+  color: #f13737;
+}
 

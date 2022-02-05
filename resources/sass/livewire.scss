@@ -1,0 +1,32 @@
+/******************COMPONENT - CONTA -TABLE***********************/ 
+div.conta-container-acoes{
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    div.acoes{
+        box-sizing: border-box;
+        width: 300px;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: $cor-aplicacao;
+        padding: 10px;
+        border-radius: 10px 10px 0 0;
+        z-index: 4;
+        top: 0px;
+        a{
+            text-decoration: none;
+            color:white;
+            margin: 0px 5px;
+            padding: 3px;
+            &:hover{
+                background-color:white;
+                color: $cor-aplicacao;
+            }
+        }
+    }
+}
