@@ -2,7 +2,7 @@
     {{-- Be like water. --}}
     <div class="conta-container-acoes">
         <div class="acoes">
-            <a href="">Cadastrar</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#modalContaCreate">Cadastrar</a>
             <a href="">Editar</a>
             <a href="">Excluir</a>
             <a href="">Buscar</a>
@@ -32,6 +32,11 @@
     </div>
     {{-- Paginação --}}
 
+
+    {{-- Modal de cadastro --}}
+    @component('components.modal', ['titulo' => 'Cadastrar conta', 'id' => 'modalContaCreate'])
+        
+    @endcomponent
     <script>
         $(function(){
             let id_selecionado = 0;
