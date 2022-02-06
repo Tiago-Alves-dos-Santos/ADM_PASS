@@ -34,8 +34,8 @@
 
 
     {{-- Modal de cadastro --}}
-    @component('components.modal', ['titulo' => 'Cadastrar conta', 'id' => 'modalContaCreate'])
-        
+    @component('components.modal', ['titulo' => 'Cadastrar/Editar conta', 'id' => 'modalContaCreate'])
+        <livewire:components.conta.formulario>
     @endcomponent
     <script>
         $(function(){
