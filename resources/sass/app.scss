@@ -11,7 +11,10 @@ div{
     position: relative;
     box-sizing: border-box;
 }
-// $enable-grid-classes: 1;
+/****ERRO MSG DO FORMULARIO******/
+div.error-message{
+  color:red;
+}
 /***********************TABELA*****************************/
 .height-table{
   height: 435px;

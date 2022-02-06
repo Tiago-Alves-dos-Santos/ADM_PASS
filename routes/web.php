@@ -1,7 +1,9 @@
 <?php
 
+
 use App\Http\Livewire\Pages\Index;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Pages\Plataforma;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Index::class);
+Route::get('/', Index::class)->name('view.index');
+Route::get('/plataformas', Plataforma::class)->name('view.plataforma');
