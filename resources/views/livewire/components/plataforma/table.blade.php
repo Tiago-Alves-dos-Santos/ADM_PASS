@@ -5,7 +5,7 @@
             <a href="" wire:click.prevent="createOpenModal">Cadastrar</a>
             <a href="" wire:click.prevent='editOpenModal'>Editar</a>
             <a href="" wire:click.prevent='showAlertQuestion'>Excluir</a>
-            <a href="">Buscar</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#modalPlataformaFiltro">Buscar</a>
         </div>
     </div>
 
@@ -36,6 +36,10 @@
     {{-- Modal de cadastro --}}
     @component('components.modal', ['titulo' => 'Cadastrar/Editar plataforma', 'id' => 'modalPlataforma'])
         <livewire:components.plataforma.formulario>
+    @endcomponent
+    {{-- Modal de filtro --}}
+    @component('components.modal', ['titulo' => 'Buscar plataforma', 'id' => 'modalPlataformaFiltro'])
+        <livewire:components.plataforma.form-filtro>
     @endcomponent
     <script>
         $(function(){

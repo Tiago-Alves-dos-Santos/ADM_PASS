@@ -80,6 +80,7 @@ class Table extends Component
             $this->msg_question['titulo'] = 'Atenção!';
             $this->msg_question['information'] = 'Realmente deseja excluir esta plataforma?';
             $this->emit('plataforma.table.questionMsg', $this->msg_question, $this->id_linha);
+            $this->id_linha = 0;
         }else{//linha não marcada
             $this->msg_toast["titulo"] = "Alerta!";
             $this->msg_toast["information"] = "Plataforma não selecionada! <br> Clique em uma plataforma!";
