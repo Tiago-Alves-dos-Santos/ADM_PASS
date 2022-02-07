@@ -29,6 +29,10 @@ class Formulario extends Component
     {
     }
 
+    /**
+     * Seta a aopção que vai ser ocorrida, a partir de um botao,
+     * direciona para formulario ou abri alert question em caso de deleção
+     */
     public function setOpcao($id_plataforma,$opcao)
     {
         $this->id_plataforma = $id_plataforma;
@@ -45,6 +49,9 @@ class Formulario extends Component
         }
     }
 
+    /**
+     * Metodo de cadastro de plataforma
+     */
     public function createPlataforma()
     {
         try {
@@ -72,7 +79,9 @@ class Formulario extends Component
             $this->reset(['plataforma', 'msg_toast','opcao_type']);
         }
     }
-
+    /**
+     * Metodo de atualização de plataforma
+     */
     public function updatePlataforma()
     {
         try {
@@ -101,6 +110,9 @@ class Formulario extends Component
         }
     }
 
+    /**
+     * Meotod de formulario que redireciona para cadastro ou atualização
+     */
     public function createUpdate()
     {
         $this->validate();

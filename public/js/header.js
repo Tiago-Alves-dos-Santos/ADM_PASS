@@ -1,3 +1,10 @@
+/**
+ * Função para mostrar toast
+ * @param {*} titulo 
+ * @param {*} information 
+ * @param {*} opcao 
+ * @param {*} tempo 
+ */
 function showToast(titulo, information, opcao = 0,tempo = 5000) {
     let opcoes = ["info","success", "warning","error",""];
     $.toast({

@@ -10,6 +10,6 @@ class Plataforma extends Component
     {
         return view('livewire.pages.plataforma')
         ->extends('layouts.default', ['pageId' => 'plataforma'])
-        ->section('defaultPage');;
+        ->section('defaultPage');
     }
 }
