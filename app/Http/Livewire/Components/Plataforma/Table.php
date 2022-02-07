@@ -11,7 +11,8 @@ class Table extends Component
     public $opcao = ["cadastrar","editar","deletar"];
     protected $listeners = [
         'plataformas-reload' => '$refresh',
-        'marcarLinha'
+        'marcarLinha',
+        'deletarPlataforma'
     ];
     public $msg_toast = [
         "titulo" => '',
@@ -19,6 +20,10 @@ class Table extends Component
         "opcao_type" => ["info" => 0,"success" => 1, "warning" => 2 ,"error" => 3,"" => 4],
         "opcao" => 0,
         "tempo" => 5000
+    ];
+    public $msg_question = [
+        "titulo" => '',
+        "information" => ''
     ];
     /**
      * Verfica se a tabela de plataformas possui alguma linha marcada
@@ -65,6 +70,46 @@ class Table extends Component
             $this->reset(['msg_toast']);
         }
     }
+
+    /**
+     * Alerta de pergunta de exclusao
+     */
+    public function showAlertQuestion()
+    {
+        if($this->verficarLinha()){
+            $this->msg_question['titulo'] = 'Atenção!';
+            $this->msg_question['information'] = 'Realmente deseja excluir esta plataforma?';
+            $this->emit('plataforma.table.questionMsg', $this->msg_question, $this->id_linha);
+        }else{//linha não marcada
+            $this->msg_toast["titulo"] = "Alerta!";
+            $this->msg_toast["information"] = "Plataforma não selecionada! <br> Clique em uma plataforma!";
+            $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["warning"];
+            $this->emit('plataforma.formulario.toast', $this->msg_toast);
+            $this->reset(['msg_toast']);
+        }
+    }
+    /**
+     * Deletar Plataforma
+     */
+
+     public function deletarPlataforma($id_plataforma)
+     {
+        try {
+            Plataforma::where('id', $id_plataforma)->forceDelete();
+            $this->msg_toast["titulo"] = "Sucesso!";
+            $this->msg_toast["information"] = "Plataforma deletada permanentemente do banco!";
+            $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["success"];
+            $this->emit('plataformas-reload');
+            $this->emit('plataforma.formulario.toast', $this->msg_toast);
+        } catch (\Exception $e) {
+            $this->msg_toast["titulo"] = "Error!";
+            $this->msg_toast["information"] = $e->getMessage();
+            $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["error"];
+            $this->emit('plataforma.formulario.toast', $this->msg_toast);
+            $this->reset(['msg_toast']);
+        }
+     }
+
     public function render()
     {
         return view('livewire.components.plataforma.table', [

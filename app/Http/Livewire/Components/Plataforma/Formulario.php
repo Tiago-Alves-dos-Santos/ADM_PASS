@@ -16,7 +16,7 @@ class Formulario extends Component
         'setOpcao'
     ];
     protected $rules = [
-        'plataforma' => 'required|min:5', 
+        'plataforma' => 'required|min:5|regex:/^[a-zA-Z]/', 
     ];
     public $msg_toast = [
         "titulo" => '',
@@ -57,7 +57,7 @@ class Formulario extends Component
         try {
             if(!Plataforma::verficarExistencia($this->plataforma, $this->opcao[0])){
                 Plataforma::create([
-                    "plataforma" => strtoupper($this->plataforma)
+                    "plataforma" => mb_strtoupper($this->plataforma)
                 ]);
                 $this->msg_toast["titulo"] = "Sucesso!";
                 $this->msg_toast["information"] = "Plataforma cadastrada com sucesso!";
@@ -87,7 +87,7 @@ class Formulario extends Component
         try {
             if(!Plataforma::verficarExistencia($this->plataforma, $this->opcao[1], $this->id_plataforma)){
                 Plataforma::where('id', $this->id_plataforma)->update([
-                    "plataforma" => strtoupper($this->plataforma)
+                    "plataforma" => mb_strtoupper($this->plataforma)
                 ]);
                 $this->msg_toast["titulo"] = "Sucesso!";
                 $this->msg_toast["information"] = "Plataforma atualizada com sucesso!";

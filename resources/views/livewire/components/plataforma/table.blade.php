@@ -4,7 +4,7 @@
         <div class="acoes">
             <a href="" wire:click.prevent="createOpenModal">Cadastrar</a>
             <a href="" wire:click.prevent='editOpenModal'>Editar</a>
-            <a href="">Excluir</a>
+            <a href="" wire:click.prevent='showAlertQuestion'>Excluir</a>
             <a href="">Buscar</a>
         </div>
     </div>
@@ -50,6 +50,14 @@
                 $('tr').removeClass('selecionado');
                 id_selecionado = 0;
                 $('#modalPlataforma').modal('show');
+            });
+
+
+            Livewire.on('plataforma.table.questionMsg', (msg, id_linha) => {
+                function deletarPlataforma(){
+                    Livewire.emit('deletarPlataforma', id_linha);
+                }
+                showQuestion(msg.titulo, msg.information, deletarPlataforma);
             });
         });
     </script>
