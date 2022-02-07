@@ -15,7 +15,7 @@ class Table extends Component
      */
     public function marcarLinha($id_linha)
     {
-        $this->emit('evt.marcarLinha', $id_linha);
+        $this->emit('plataforma.table.marcarLinha', $id_linha);
     }
 
     public function render()

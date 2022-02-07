@@ -25,7 +25,7 @@
     </form>
     <script>
         $(function(){
-            Livewire.on('plataforma.toast', (msg) => {
+            Livewire.on('plataforma.formulario.toast', (msg) => {
                 showToast(msg.titulo, msg.information, msg.opcao);
                 $('#modalPlataforma').modal('hide');
             });

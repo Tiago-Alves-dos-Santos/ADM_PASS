@@ -2,8 +2,8 @@
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
     <div class="conta-container-acoes">
         <div class="acoes">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#modalPlataforma">Cadastrar</a>
-            <a href="">Editar</a>
+            <a href="" wire:click.prevent="createOpenModal">Cadastrar</a>
+            <a href="" wire:click.prevent='editOpenModal'>Editar</a>
             <a href="">Excluir</a>
             <a href="">Buscar</a>
         </div>
@@ -15,11 +15,15 @@
                 <th>PLATAFORMA</th>
             </thead>
             <tbody>
-                @for ($i=0; $i < 40; $i++)
-                <tr wire:click='marcarLinha({{$i}}, 0)' id="{{$i}}">
-                    <td>PAGSEGURO {{$i}}</td>
+                @forelse ($plataformas as $value)
+                <tr wire:click='marcarLinha({{$value->id}})' id="{{$value->id}}">
+                    <td>{{$value->plataforma}}</td>
                 </tr>
-                @endfor
+                @empty
+                <tr>
+                    <td>NENHUMA PLATAFORMA CADASTRADA!</td>
+                </tr>
+                @endforelse
             </tbody>
             <tfoot>
 
@@ -36,11 +40,17 @@
     <script>
         $(function(){
             let id_selecionado = 0;
-            Livewire.on('evt.marcarLinha', (id_linha) => {
+            Livewire.on('plataforma.table.marcarLinha', (id_linha) => {
                 $('tr').removeClass('selecionado');
                 $("tr#"+id_linha).addClass('selecionado');
                 id_selecionado = id_linha;
-            })
+            });
+
+            Livewire.on('plataforma.table.openModal', () => {
+                $('tr').removeClass('selecionado');
+                id_selecionado = 0;
+                $('#modalPlataforma').modal('show');
+            });
         });
     </script>
 </div>
