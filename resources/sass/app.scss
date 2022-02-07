@@ -7,9 +7,19 @@ $cor-aplicacao:rgb(241, 55, 55);
     margin: 0;
     padding: 0;
 }
+body{
+  overflow-x: hidden;
+}
 div{
     position: relative;
     box-sizing: border-box;
+}
+/*********INPUT TEXT*************/
+input[type='text']{
+  text-transform: uppercase;
+}
+input[type='text'].senha{
+  text-transform: none;
 }
 /****ERRO MSG DO FORMULARIO******/
 div.error-message{
@@ -19,7 +29,7 @@ div.error-message{
 .height-table{
   height: 435px;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 table.myTable{
   width: 100%;
@@ -55,6 +65,28 @@ table.myTable{
         border:none;
       }
     }
+  }
+}
+/*********PAGINATION*********/
+.pagination{
+  border: none !important;
+  .page-link{
+    border:none;
+    color: $cor-aplicacao;
+    margin: 0 10px;
+  }
+  .page-item .page-link{
+    border-radius: 10px;
+    border:none;
+  }
+  .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: $cor-aplicacao;
+  }
+  .page-item .page-link:hover{
+    color: #fff;
+    background-color: darken($cor-aplicacao, 30%);
   }
 }
 

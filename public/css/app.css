@@ -1530,9 +1530,23 @@ a.ui-button:active,
   padding: 0;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 div {
   position: relative;
   box-sizing: border-box;
+}
+
+/*********INPUT TEXT*************/
+
+input[type=text] {
+  text-transform: uppercase;
+}
+
+input[type=text].senha {
+  text-transform: none;
 }
 
 /****ERRO MSG DO FORMULARIO******/
@@ -1546,7 +1560,7 @@ div.error-message {
 .height-table {
   height: 435px;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 table.myTable {
@@ -1591,6 +1605,34 @@ table.myTable tbody tr.selecionado {
 
 table.myTable tbody tr.selecionado td {
   border: none;
+}
+
+/*********PAGINATION*********/
+
+.pagination {
+  border: none !important;
+}
+
+.pagination .page-link {
+  border: none;
+  color: #f13737;
+  margin: 0 10px;
+}
+
+.pagination .page-item .page-link {
+  border-radius: 10px;
+  border: none;
+}
+
+.pagination .page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #f13737;
+}
+
+.pagination .page-item .page-link:hover {
+  color: #fff;
+  background-color: #860909;
 }
 
 /********************************************LAYOUTS************************************************/

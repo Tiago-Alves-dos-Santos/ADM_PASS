@@ -10,9 +10,15 @@
     </div>
 
     <div class="table-responsive height-table">
+  
         <table class="myTable">
             <thead>
-                <th>PLATAFORMA</th>
+                <th>
+                    PLATAFORMA
+                    @if ($search_plataform !== '' & $search_plataform !== null)
+                    , PROCURANDO: {{$search_plataform}}
+                    @endif
+                </th>
             </thead>
             <tbody>
                 @forelse ($plataformas as $value)
@@ -26,12 +32,16 @@
                 @endforelse
             </tbody>
             <tfoot>
-
+                
             </tfoot>
         </table>
+        {{-- Paginação --}}
+        <div class="row mt-3">
+            <div class="col-md-12 d-flex justify-content-end">
+                {{$plataformas->links()}}
+            </div>
+        </div>
     </div>
-    {{-- Paginação --}}
-
 
     {{-- Modal de cadastro --}}
     @component('components.modal', ['titulo' => 'Cadastrar/Editar plataforma', 'id' => 'modalPlataforma'])
