@@ -16,7 +16,7 @@
             </thead>
             <tbody>
                 @for ($i=0; $i < 40; $i++)
-                <tr wire:click='' id="{{$i}}">
+                <tr wire:click='marcarLinha({{$i}}, 0)' id="{{$i}}">
                     <td>PAGSEGURO {{$i}}</td>
                 </tr>
                 @endfor

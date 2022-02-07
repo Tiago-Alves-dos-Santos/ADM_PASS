@@ -44,7 +44,7 @@
                 $('tr').removeClass('selecionado');
                 $("tr#"+id_linha).addClass('selecionado');
                 id_selecionado = id_linha;
-            })
+            });
         });
     </script>
 </div>
