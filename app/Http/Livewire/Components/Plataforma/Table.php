@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Components\Plataforma;
 
 use Livewire\Component;
 use App\Models\Plataforma;
+use Livewire\WithPagination;
 
 class Table extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $id_linha = 0;
     public $opcao = ["cadastrar","editar","deletar"];
     protected $listeners = [
@@ -114,7 +117,7 @@ class Table extends Component
     public function render()
     {
         return view('livewire.components.plataforma.table', [
-            'plataformas' => Plataforma::orderBy('plataforma')->get(),
+            'plataformas' => Plataforma::orderBy('plataforma')->paginate(1),
         ]);
     }
 }

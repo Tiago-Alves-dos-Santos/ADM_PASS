@@ -57,6 +57,28 @@ table.myTable{
     }
   }
 }
+/*********PAGINATION*********/
+.pagination{
+  border: none !important;
+  .page-link{
+    border:none;
+    color: $cor-aplicacao;
+    margin: 0 10px;
+  }
+  .page-item .page-link{
+    border-radius: 10px;
+    border:none;
+  }
+  .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: $cor-aplicacao;
+  }
+  .page-item .page-link:hover{
+    color: #fff;
+    background-color: darken($cor-aplicacao, 30%);
+  }
+}
 
 /********************************************LAYOUTS************************************************/
 @import 'layouts.scss';

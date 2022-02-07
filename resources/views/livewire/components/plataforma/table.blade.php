@@ -26,12 +26,16 @@
                 @endforelse
             </tbody>
             <tfoot>
-
+                
             </tfoot>
         </table>
+        {{-- Paginação --}}
+        <div class="row mt-3">
+            <div class="col-md-12 d-flex justify-content-end">
+                {{$plataformas->links()}}
+            </div>
+        </div>
     </div>
-    {{-- Paginação --}}
-
 
     {{-- Modal de cadastro --}}
     @component('components.modal', ['titulo' => 'Cadastrar/Editar plataforma', 'id' => 'modalPlataforma'])
