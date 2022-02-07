@@ -12,10 +12,12 @@ class Table extends Component
     protected $paginationTheme = 'bootstrap';
     public $id_linha = 0;
     public $opcao = ["cadastrar","editar","deletar"];
+    public $search_plataform = '';
     protected $listeners = [
         'plataformas-reload' => '$refresh',
         'marcarLinha',
-        'deletarPlataforma'
+        'deletarPlataforma',
+        'setSearchPlataform'
     ];
     public $msg_toast = [
         "titulo" => '',
@@ -114,10 +116,16 @@ class Table extends Component
         }
      }
 
+     public function setSearchPlataform($value)
+     {
+        //dd($value);
+        $this->search_plataform = $value;
+     }
+
     public function render()
     {
         return view('livewire.components.plataforma.table', [
-            'plataformas' => Plataforma::orderBy('plataforma')->paginate(1),
+            'plataformas' => Plataforma::where('plataforma','like',"%{$this->search_plataform}%")->orderBy('plataforma')->paginate(10),
         ]);
     }
 }

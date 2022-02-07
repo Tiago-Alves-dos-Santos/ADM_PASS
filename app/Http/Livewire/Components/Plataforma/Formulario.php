@@ -16,7 +16,7 @@ class Formulario extends Component
         'setOpcao'
     ];
     protected $rules = [
-        'plataforma' => 'required|min:5|regex:/^[a-zA-Z]/', 
+        'plataforma' => 'required|min:3|regex:/^[a-zA-Z]/', 
     ];
     public $msg_toast = [
         "titulo" => '',
@@ -41,8 +41,6 @@ class Formulario extends Component
             $this->plataforma = Plataforma::find($this->id_plataforma)->plataforma;
             //abrir modal
             $this->emit('plataforma.table.openModal');
-        }else if($this->opcao_type === array_search('deletar', $this->opcao)){
-            //abri alert question 
         }else if($this->opcao_type === array_search('cadastrar', $this->opcao)){
             //reset prpiedades
             $this->reset(['plataforma', 'msg_toast','id_plataforma']);

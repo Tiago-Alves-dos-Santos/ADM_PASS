@@ -1530,9 +1530,23 @@ a.ui-button:active,
   padding: 0;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 div {
   position: relative;
   box-sizing: border-box;
+}
+
+/*********INPUT TEXT*************/
+
+input[type=text] {
+  text-transform: uppercase;
+}
+
+input[type=text].senha {
+  text-transform: none;
 }
 
 /****ERRO MSG DO FORMULARIO******/
@@ -1546,7 +1560,7 @@ div.error-message {
 .height-table {
   height: 435px;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 table.myTable {

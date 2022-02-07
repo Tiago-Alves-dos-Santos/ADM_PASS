@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <label for="">Plataforma</label>
-                <input type="text" wire:model.prevent='plataforma' class="form-control @error('plataforma') is-invalid @enderror">
+                <input type="text" wire:model.prevent='plataforma' class="form-control @error('plataforma') is-invalid @enderror" autofocus>
                 <div class="error-message">
                     @error('plataforma')
                         {{$message}}

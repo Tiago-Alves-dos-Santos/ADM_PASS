@@ -10,9 +10,15 @@
     </div>
 
     <div class="table-responsive height-table">
+  
         <table class="myTable">
             <thead>
-                <th>PLATAFORMA</th>
+                <th>
+                    PLATAFORMA
+                    @if ($search_plataform !== '' & $search_plataform !== null)
+                    , PROCURANDO: {{$search_plataform}}
+                    @endif
+                </th>
             </thead>
             <tbody>
                 @forelse ($plataformas as $value)
