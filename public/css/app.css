@@ -1535,6 +1535,12 @@ div {
   box-sizing: border-box;
 }
 
+/****ERRO MSG DO FORMULARIO******/
+
+div.error-message {
+  color: red;
+}
+
 /***********************TABELA*****************************/
 
 .height-table {

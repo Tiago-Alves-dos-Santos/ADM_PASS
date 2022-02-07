@@ -40,11 +40,11 @@
     <script>
         $(function(){
             let id_selecionado = 0;
-            Livewire.on('evt.marcarLinha', (id_linha) => {
+            Livewire.on('plataforma.table.marcarLinha', (id_linha) => {
                 $('tr').removeClass('selecionado');
                 $("tr#"+id_linha).addClass('selecionado');
                 id_selecionado = id_linha;
-            })
+            });
         });
     </script>
 </div>
