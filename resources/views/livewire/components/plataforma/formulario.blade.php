@@ -1,10 +1,10 @@
 <div>
     {{-- Because she competes with no one, no one can compete with her. --}}
-    <form wire:submit.prevent='' method="get" class="needs-validation">
+    <form wire:submit.prevent='createUpdate' method="get" class="needs-validation">
         <div class="row">
             <div class="col-md-12">
                 <label for="">Plataforma</label>
-                <input type="text" name="" id="" class="form-control @error('plataforma') is-invalid @enderror">
+                <input type="text" wire:model.prevent='plataforma' class="form-control @error('plataforma') is-invalid @enderror">
                 <div class="error-message">
                     @error('plataforma')
                         {{$message}}
@@ -23,4 +23,12 @@
             </div>
         </div>
     </form>
+    <script>
+        $(function(){
+            Livewire.on('plataforma.toast', (msg) => {
+                showToast(msg.titulo, msg.information, msg.opcao);
+                $('#modalPlataforma').modal('hide');
+            });
+        });
+    </script>
 </div>

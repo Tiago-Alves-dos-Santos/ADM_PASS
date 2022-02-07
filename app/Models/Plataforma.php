@@ -10,6 +10,7 @@ class Plataforma extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
     public static function verficarExistencia($plataforma,$opcao, $id_plataforma = 0)
     {
         if($opcao === "cadastrar"){
