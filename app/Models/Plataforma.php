@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Conta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,6 +12,11 @@ class Plataforma extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+    /************RELACIONAMENTOS***************/
+    public function contas()
+    {
+        return $this->belongsToMany(Conta::class,'conta_plataformas');
+    }
     /**
      * Verifica existenci da plataforma no modo update e create
      */

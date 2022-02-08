@@ -107,7 +107,13 @@ class Table extends Component
             $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["success"];
             $this->emit('plataformas-reload');
             $this->emit('plataforma.formulario.toast', $this->msg_toast);
-        } catch (\Exception $e) {
+        }catch(\PDOException $e){
+            $this->msg_toast["titulo"] = "Error de deleção de relaciomento";
+            $this->msg_toast["information"] = "O valor não pode ser deletado, pois está vinculado a uma ou mais contas!";
+            $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["error"];
+            $this->emit('plataforma.formulario.toast', $this->msg_toast);
+            $this->reset(['msg_toast']);
+        }catch (\Exception $e) {
             $this->msg_toast["titulo"] = "Error!";
             $this->msg_toast["information"] = $e->getMessage();
             $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["error"];

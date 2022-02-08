@@ -2,7 +2,7 @@
     {{-- Be like water. --}}
     <div class="conta-container-acoes">
         <div class="acoes">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#modalContaCreate">Cadastrar</a>
+            <a href="" wire:click.prevent='setOpcao(0)'>Cadastrar</a>
             <a href="">Editar</a>
             <a href="">Excluir</a>
             <a href="">Buscar</a>
@@ -17,13 +17,17 @@
                 <th>PLATAFORMA</th>
             </thead>
             <tbody>
-                @for ($i=0; $i < 40; $i++)
-                <tr wire:click='marcarLinha({{$i}})' id="{{$i}}">
-                    <td>teste@email.com</td>
-                    <td>12345</td>
-                    <td>PAGSEGURO</td>
+                @forelse ($conta_plataformas as $value)
+                <tr wire:click='marcarLinha({{$value->id}})' id="{{$value->id}}">
+                    <td>{{$value->email}}</td>
+                    <td>{{$value->senha}}</td>
+                    <td>{{$value->plataforma}}</td>
                 </tr>
-                @endfor
+                @empty
+                <tr>
+                    <td colspan="3">NENHUMA CONTA CADASTRADA!</td>
+                </tr>
+                @endforelse
             </tbody>
             <tfoot>
 
@@ -39,11 +43,20 @@
     @endcomponent
     <script>
         $(function(){
-            let id_selecionado = 0;
             Livewire.on('plataforma.table.marcarLinha', (id_linha) => {
                 $('tr').removeClass('selecionado');
                 $("tr#"+id_linha).addClass('selecionado');
-                id_selecionado = id_linha;
+            });
+            Livewire.on('components.conta.openModalForm', () => {
+                $('tr').removeClass('selecionado');
+                $("#modalContaCreate").modal('show');
+            });
+            Livewire.on('components.conta.closeModalForm', () => {
+                $("#modalContaCreate").modal('hide');
+            });
+            Livewire.on('conta.table.toast', (msg) => {
+                showToast(msg.titulo, msg.information, msg.opcao);
+                $('#modalPlataforma').modal('hide');
             });
         });
     </script>
