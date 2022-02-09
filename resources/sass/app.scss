@@ -18,7 +18,7 @@ div{
 input[type='text']{
   text-transform: uppercase;
 }
-input[type='text'].senha{
+input[type='text'].senha, input[type='text'].email{
   text-transform: none;
 }
 /****ERRO MSG DO FORMULARIO******/

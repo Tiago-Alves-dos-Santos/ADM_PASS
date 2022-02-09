@@ -12,10 +12,15 @@ class Table extends Component
     public $search_plataforma = '';
     protected $listeners = [
         'contas-reload' => '$refresh',
-        'marcarLinha'
+        'marcarLinha',
+        'getSearchValues'
     ];
+    public function openModalFilter()
+    {
+       $this->emit('components.conta.openModalContaFilter');
+    }
     /**
-     * 
+     * Setar tipo de formulario que sera aberto edição/cadastro
      */
     public function setOpcao($opcao,$id_conta_plataforma=0)
     {
@@ -28,6 +33,15 @@ class Table extends Component
     {
         $this->id_linha = $id_linha;
         $this->emit('plataforma.table.marcarLinha', $id_linha);
+    }
+
+    /**
+     * receber valores de busca
+     */
+    public function getSearchValues($search_email, $search_plataforma)
+    {
+        $this->search_email = $search_email;
+        $this->search_plataforma = $search_plataforma;
     }
 
     public function render()

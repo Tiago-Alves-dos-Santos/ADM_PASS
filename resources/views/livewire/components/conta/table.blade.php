@@ -5,7 +5,7 @@
             <a href="" wire:click.prevent='setOpcao(0)'>Cadastrar</a>
             <a href="">Editar</a>
             <a href="">Excluir</a>
-            <a href="">Buscar</a>
+            <a href="" wire:click.prevent='openModalFilter'>Buscar</a>
         </div>
     </div>
 
@@ -41,6 +41,11 @@
     @component('components.modal', ['titulo' => 'Cadastrar/Editar conta', 'id' => 'modalContaCreate'])
         <livewire:components.conta.formulario>
     @endcomponent
+
+    {{-- Modal de filtro --}}
+    @component('components.modal', ['titulo' => 'Buscar conta', 'id' => 'modalContaFilter'])
+        <livewire:components.conta.form-filtro>
+    @endcomponent
     <script>
         $(function(){
             Livewire.on('plataforma.table.marcarLinha', (id_linha) => {
@@ -53,6 +58,13 @@
             });
             Livewire.on('components.conta.closeModalForm', () => {
                 $("#modalContaCreate").modal('hide');
+            });
+            Livewire.on('components.conta.openModalContaFilter', () => {
+                $('tr').removeClass('selecionado');
+                $("#modalContaFilter").modal('show');
+            });
+            Livewire.on('components.conta.closeModalContaFilter', () => {
+                $("#modalContaFilter").modal('hide');
             });
             Livewire.on('conta.table.toast', (msg) => {
                 showToast(msg.titulo, msg.information, msg.opcao);
