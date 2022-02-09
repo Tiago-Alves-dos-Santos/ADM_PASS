@@ -12,7 +12,7 @@ class Formulario extends Component
     public $id_conta = 0;
     public $email = null;
     public $senha = null;
-    public $id_plataforma = 0;
+    public $id_plataforma = null;
 
     public $opcao = ["cadastrar","editar","deletar"];
     public $opcao_type = 0;
@@ -34,7 +34,7 @@ class Formulario extends Component
     public function checkOpcao($opcao, $id_conta_plataforma = 0)
     {
         if($opcao === array_search('cadastrar', $this->opcao)){
-            $this->reset(['id_conta', 'email','senha','id_plataforma']);
+            $this->reset(['id_conta', 'email','senha']);
             $this->opcao_type = $opcao;
             $this->emit('components.conta.openModalForm');
         }else if($opcao === array_search('editar', $this->opcao) && $id_conta_plataforma <= 0){
@@ -67,6 +67,7 @@ class Formulario extends Component
             $this->emit('components.conta.closeModalForm');
             $this->emit('conta.table.toast', $this->msg_toast);
             $this->reset(['msg_toast']);
+            $this->reset(['id_plataforma']);
         } catch (\Exception $e) {
             $this->msg_toast["titulo"] = "Erro!";
             $this->msg_toast["information"] = $e->getMessage();
@@ -74,6 +75,7 @@ class Formulario extends Component
             $this->emit('components.conta.closeModalForm');
             $this->emit('conta.table.toast', $this->msg_toast);
             $this->reset(['msg_toast']);
+            $this->reset(['id_plataforma']);
         }
     }
     /**
