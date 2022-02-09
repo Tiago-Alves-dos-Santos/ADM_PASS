@@ -13,6 +13,7 @@ class Formulario extends Component
     public $email = null;
     public $senha = null;
     public $id_plataforma = null;
+    public $contaPlataformaId = 0;
 
     public $opcao = ["cadastrar","editar","deletar"];
     public $opcao_type = 0;
@@ -40,7 +41,15 @@ class Formulario extends Component
         }else if($opcao === array_search('editar', $this->opcao) && $id_conta_plataforma <= 0){
             throw new \Exception("Parametro id_conta_plataforma inválido na opção editar");
         }else if($opcao === array_search('editar', $this->opcao)){
-
+            $this->opcao_type = $opcao;
+            $conta_plataforma = ContaPlataforma::find($id_conta_plataforma);
+            $this->contaPlataformaId = $conta_plataforma->id;
+            $conta = Conta::find($conta_plataforma->conta_id);
+            $this->id_conta = $conta->id;
+            $this->email = $conta->email;
+            $this->senha = $conta->senha;
+            $this->id_plataforma = $conta_plataforma->plataforma_id;
+            $this->emit('components.conta.openModalForm');
         }else{
             throw new \Exception("Parametro opção com valor não reconhecido na condição, valor: ".$opcao);
         }
@@ -62,7 +71,7 @@ class Formulario extends Component
             ]);
             $this->emit('contas-reload');
             $this->msg_toast["titulo"] = "Sucesso!";
-            $this->msg_toast["information"] = "Conta salva som sucesso!";
+            $this->msg_toast["information"] = "Conta alterada som sucesso!";
             $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["success"];
             $this->emit('components.conta.closeModalForm');
             $this->emit('conta.table.toast', $this->msg_toast);
@@ -83,7 +92,31 @@ class Formulario extends Component
      */
     public function editar()
     {
-        # code...
+        try {
+            Conta::where('id', $this->id_conta)->update([
+                "email" => $this->email,
+                "senha" => $this->senha
+            ]);
+            ContaPlataforma::where('id', $this->contaPlataformaId)->update([
+                "plataforma_id" => $this->id_plataforma
+            ]);
+            $this->emit('contas-reload');
+            $this->msg_toast["titulo"] = "Sucesso!";
+            $this->msg_toast["information"] = "Conta salva som sucesso!";
+            $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["success"];
+            $this->emit('components.conta.closeModalForm');
+            $this->emit('conta.table.toast', $this->msg_toast);
+            $this->reset(['msg_toast']);
+            $this->reset(['id_plataforma']);
+        } catch (\Exception $e) {
+            $this->msg_toast["titulo"] = "Erro!";
+            $this->msg_toast["information"] = $e->getMessage();
+            $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["error"];
+            $this->emit('components.conta.closeModalForm');
+            $this->emit('conta.table.toast', $this->msg_toast);
+            $this->reset(['msg_toast']);
+            $this->reset(['id_plataforma']);
+        }
     }
     
     /**

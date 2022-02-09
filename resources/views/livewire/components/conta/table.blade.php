@@ -3,7 +3,7 @@
     <div class="conta-container-acoes">
         <div class="acoes">
             <a href="" wire:click.prevent='setOpcao(0)'>Cadastrar</a>
-            <a href="">Editar</a>
+            <a href="" wire:click.prevent='setOpcao(1)'>Editar</a>
             <a href="">Excluir</a>
             <a href="" wire:click.prevent='openModalFilter'>Buscar</a>
         </div>

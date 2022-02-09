@@ -10,6 +10,13 @@ class Table extends Component
     public $id_linha = 0;
     public $search_email = '';
     public $search_plataforma = '';
+    public $msg_toast = [
+        "titulo" => '',
+        "information" => '',
+        "opcao_type" => ["info" => 0,"success" => 1, "warning" => 2 ,"error" => 3,"" => 4],
+        "opcao" => 0,
+        "tempo" => 5000
+    ];
     protected $listeners = [
         'contas-reload' => '$refresh',
         'marcarLinha',
@@ -22,9 +29,32 @@ class Table extends Component
     /**
      * Setar tipo de formulario que sera aberto edição/cadastro
      */
-    public function setOpcao($opcao,$id_conta_plataforma=0)
+    public function setOpcao($opcao)
     {
-        $this->emitTo('components.conta.formulario', 'checkOpcao', $opcao, $id_conta_plataforma);
+        if($opcao === 0){
+            $this->id_linha = 0;
+            $this->emitTo('components.conta.formulario', 'checkOpcao', $opcao);
+        }else if($opcao === 1){
+            if($this->verficarLinha()){
+                $this->emitTo('components.conta.formulario', 'checkOpcao', $opcao, $this->id_linha);
+                $this->id_linha = 0;            
+            }else{
+                $this->msg_toast["titulo"] = "Alerta!";
+                $this->msg_toast["information"] = "Conta não selecionada! <br> Clique em uma conta!";
+                $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["warning"];
+                $this->emit('conta.table.toast', $this->msg_toast);
+                $this->reset(['msg_toast']);
+            }
+        }
+    }
+    /**
+     * Verfica se a tabela de contas possui alguma linha marcada
+     * true = sim
+     * false = nao
+     */
+    private function verficarLinha()
+    {
+        return ($this->id_linha <= 0) ?false:true;
     }
     /**
      * Marcar linha da tabela selecionado, possui evento no compo
