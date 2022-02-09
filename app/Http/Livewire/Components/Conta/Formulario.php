@@ -30,7 +30,7 @@ class Formulario extends Component
     protected $rules = [
         'email' => 'required|email', 
         'senha' => 'required|min:5', 
-        'id_plataforma' => 'required|integer'
+        // 'id_plataforma' => 'required|integer'
     ];
     public function checkOpcao($opcao, $id_conta_plataforma = 0)
     {
@@ -66,7 +66,7 @@ class Formulario extends Component
             ]);
             $conta = $conta->fresh();
             ContaPlataforma::create([
-                "plataforma_id" => $this->id_plataforma,
+                "plataforma_id" => ($this->id_plataforma == 0 ?null:null),
                 "conta_id" => $conta->id
             ]);
             $this->emit('contas-reload');
@@ -98,7 +98,7 @@ class Formulario extends Component
                 "senha" => $this->senha
             ]);
             ContaPlataforma::where('id', $this->contaPlataformaId)->update([
-                "plataforma_id" => $this->id_plataforma
+                "plataforma_id" => ($this->id_plataforma == 0 ?null:null)
             ]);
             $this->emit('contas-reload');
             $this->msg_toast["titulo"] = "Sucesso!";

@@ -4,12 +4,13 @@ namespace App\Http\Livewire\Components\Conta;
 
 use Livewire\Component;
 use App\Models\ContaPlataforma;
+use Illuminate\Support\Facades\DB;
 
 class Table extends Component
 {
     public $id_linha = 0;
-    public $search_email = '';
-    public $search_plataforma = '';
+    public $search_email = null;
+    public $search_plataforma = null;
     public $msg_toast = [
         "titulo" => '',
         "information" => '',
@@ -22,6 +23,11 @@ class Table extends Component
         'marcarLinha',
         'getSearchValues'
     ];
+
+    public function mount()
+    {
+        
+    }
     public function openModalFilter()
     {
        $this->emit('components.conta.openModalContaFilter');
@@ -74,17 +80,29 @@ class Table extends Component
         $this->search_plataforma = $search_plataforma;
     }
 
+    private function getRender()
+    {
+        if($this->search_plataforma == '' && $this->search_email == ''){
+            return ContaPlataforma::join('contas', 'contas.id', '=', 'conta_plataformas.conta_id')
+            ->leftJoin('plataformas', 'plataformas.id', '=', 'conta_plataformas.plataforma_id')
+            ->select('plataformas.plataforma', 'contas.email','contas.senha', 'conta_plataformas.*')
+            ->orderBy('email')->orderBy('plataforma')
+            ->paginate(10);
+        }else{
+            return ContaPlataforma::join('contas', 'contas.id', '=', 'conta_plataformas.conta_id')
+            ->leftJoin('plataformas', 'plataformas.id', '=', 'conta_plataformas.plataforma_id')
+            ->select('plataformas.plataforma', 'contas.email','contas.senha', 'conta_plataformas.*')
+            ->where('contas.email','like', "%{$this->search_email}%")
+            ->where('plataformas.plataforma','like', "%{$this->search_plataforma}%")
+            ->orderBy('email')->orderBy('plataforma')
+            ->paginate(10);
+        }
+    }
+
     public function render()
     {
-        
         return view('livewire.components.conta.table', [
-            'conta_plataformas' => ContaPlataforma::join('contas', 'contas.id', '=', 'conta_plataformas.conta_id')
-            ->join('plataformas', 'plataformas.id', '=', 'conta_plataformas.plataforma_id')
-            ->select('plataformas.plataforma', 'contas.email','contas.senha', 'conta_plataformas.*')
-            ->where('email','like', "%{$this->search_email}%")
-            ->where('plataforma','like', "%{$this->search_plataforma}%")
-            ->orderBy('email')->orderBy('plataforma')
-            ->paginate(10)
+            'conta_plataformas' => $this->getRender()
         ]);
     }
 }

@@ -25,7 +25,7 @@
             <div class="col-md-12">
                 <label for="">Plataforma</label>
                 <select wire:model.lazy='id_plataforma' class="form-select @error('id_plataforma') is-invalid @enderror">
-                    <option value="">Selecione a plataforma!</option>
+                    <option value="0">Selecione a plataforma!</option>
                     @foreach ($plataformas as $value)
                         <option value="{{$value->id}}">{{$value->plataforma}}</option>
                     @endforeach
