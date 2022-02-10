@@ -1,0 +1,41 @@
+/**********************Link icon*************************/
+div.link-icon-container{
+    min-width: 120px;
+    min-height: 120px;
+    a{
+        width: 100%;
+        height: 100%;
+        padding: 6px 15px;
+        border: 0.1px solid gray;
+        margin: 10px 10px 0px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 15px;
+        box-shadow: 4px 4px 14px black;
+        text-decoration: none;
+        color: black;
+        i{
+            font-size: 30px;
+        }
+        &:hover{
+            background-color: $cor-aplicacao;
+            color: white;
+            box-shadow: none;
+            border: none;
+        }
+    }
+    a.atual-page{
+        background-color: $cor-aplicacao;
+        color: white;
+        box-shadow: none;
+        border: none;
+    }
+    
+    
+    
+}
+
+/**********************FimLink icon*************************/

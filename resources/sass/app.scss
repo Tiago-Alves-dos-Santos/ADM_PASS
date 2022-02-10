@@ -1,0 +1,101 @@
+/*************************JQUERY UI******************************/
+@import '~jquery-ui/themes/base/all.css';
+/******************************************CORES***********************************************/
+$cor-aplicacao:rgb(241, 55, 55);
+/********************************************MEU CSS************************************************/
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+  overflow-x: hidden;
+}
+div{
+    position: relative;
+    box-sizing: border-box;
+}
+/*********INPUT TEXT*************/
+input[type='text']{
+  text-transform: uppercase;
+}
+input[type='text'].senha, input[type='text'].email{
+  text-transform: none;
+}
+/****ERRO MSG DO FORMULARIO******/
+div.error-message{
+  color:red;
+}
+/***********************TABELA*****************************/
+.height-table{
+  height: 435px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+table.myTable{
+  width: 100%;
+  th,td{
+    box-sizing:border-box;
+    border:.5px solid gray;
+    border-right: none;
+    border-left: none;
+    text-align: center;
+  }
+  th{
+    position: sticky;
+    border: none;
+    top: 0;
+    background-color:white;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    background-color:$cor-aplicacao;
+    color:white;
+  }
+  tbody{
+    tr{
+      cursor: pointer;
+      &:hover{
+        color:white;
+        background-color: darken($cor-aplicacao, 12%);
+        td{
+          border:none;
+        }
+      }
+    }
+    tr.selecionado{
+      color:white;
+      background-color: rgb(0, 110, 255);
+      td{
+        border:none;
+      }
+    }
+  }
+}
+/*********PAGINATION*********/
+.pagination{
+  border: none !important;
+  .page-link{
+    border:none;
+    color: $cor-aplicacao;
+    margin: 0 10px;
+  }
+  .page-item .page-link{
+    border-radius: 10px;
+    border:none;
+  }
+  .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: $cor-aplicacao;
+  }
+  .page-item .page-link:hover{
+    color: #fff;
+    background-color: darken($cor-aplicacao, 30%);
+  }
+}
+
+/********************************************LAYOUTS************************************************/
+@import 'layouts.scss';
+/********************************************COMPONENTS************************************************/
+@import 'components.scss';
+/********************************************livewire************************************************/
+@import 'livewire.scss';
