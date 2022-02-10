@@ -4,7 +4,7 @@
         <div class="acoes">
             <a href="" wire:click.prevent='setOpcao(0)'>Cadastrar</a>
             <a href="" wire:click.prevent='setOpcao(1)'>Editar</a>
-            <a href="">Excluir</a>
+            <a href="" wire:click.prevent='showQuestionDelete'>Excluir</a>
             <a href="" wire:click.prevent='openModalFilter'>Buscar</a>
         </div>
     </div>
@@ -18,11 +18,19 @@
             </thead>
             <tbody>
                 @forelse ($conta_plataformas as $value)
+                @if ($value->plataforma_id == 1)
+                <tr wire:click='marcarLinha({{$value->id}})' id="{{$value->id}}" style="color: yellow">
+                    <td>{{$value->email}}</td>
+                    <td>{{$value->senha}}</td>
+                    <td>{{$value->plataforma}}</td>
+                </tr>
+                @else
                 <tr wire:click='marcarLinha({{$value->id}})' id="{{$value->id}}">
                     <td>{{$value->email}}</td>
                     <td>{{$value->senha}}</td>
                     <td>{{$value->plataforma}}</td>
                 </tr>
+                @endif
                 @empty
                 <tr>
                     <td colspan="3">NENHUMA CONTA CADASTRADA!</td>
@@ -33,9 +41,13 @@
 
             </tfoot>
         </table>
+        {{-- Paginação --}}
+        <div class="row mt-3">
+            <div class="col-md-12 d-flex justify-content-end">
+                {{$conta_plataformas->links()}}
+            </div>
+        </div>
     </div>
-    {{-- Paginação --}}
-
 
     {{-- Modal de cadastro --}}
     @component('components.modal', ['titulo' => 'Cadastrar/Editar conta', 'id' => 'modalContaCreate'])
@@ -66,6 +78,14 @@
             Livewire.on('components.conta.closeModalContaFilter', () => {
                 $("#modalContaFilter").modal('hide');
             });
+
+            Livewire.on('components.conta.table.showDeleteQuestion', (msg,id_linha) => {
+                function deletar(){
+                    Livewire.emit('deletePlataforma', id_linha);
+                }
+                showQuestion(msg.titulo, msg.information, deletar);
+            });
+
             Livewire.on('conta.table.toast', (msg) => {
                 showToast(msg.titulo, msg.information, msg.opcao);
                 $('#modalPlataforma').modal('hide');
