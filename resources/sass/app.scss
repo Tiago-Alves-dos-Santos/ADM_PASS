@@ -18,7 +18,7 @@ div{
 input[type='text']{
   text-transform: uppercase;
 }
-input[type='text'].senha{
+input[type='text'].senha, input[type='text'].email{
   text-transform: none;
 }
 /****ERRO MSG DO FORMULARIO******/
@@ -34,7 +34,10 @@ div.error-message{
 table.myTable{
   width: 100%;
   th,td{
+    box-sizing:border-box;
     border:.5px solid gray;
+    border-right: none;
+    border-left: none;
     text-align: center;
   }
   th{

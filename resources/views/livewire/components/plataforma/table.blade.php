@@ -22,9 +22,15 @@
             </thead>
             <tbody>
                 @forelse ($plataformas as $value)
+                @if ($value->id == 1)
+                <tr wire:click='marcarLinha({{$value->id}})' id="{{$value->id}}" style="color: yellow">
+                    <td>{{$value->plataforma}}</td>
+                </tr>
+                @else
                 <tr wire:click='marcarLinha({{$value->id}})' id="{{$value->id}}">
                     <td>{{$value->plataforma}}</td>
                 </tr>
+                @endif
                 @empty
                 <tr>
                     <td>NENHUMA PLATAFORMA CADASTRADA!</td>

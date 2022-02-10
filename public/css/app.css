@@ -1545,7 +1545,8 @@ input[type=text] {
   text-transform: uppercase;
 }
 
-input[type=text].senha {
+input[type=text].senha,
+input[type=text].email {
   text-transform: none;
 }
 
@@ -1569,7 +1570,10 @@ table.myTable {
 
 table.myTable th,
 table.myTable td {
+  box-sizing: border-box;
   border: 0.5px solid gray;
+  border-right: none;
+  border-left: none;
   text-align: center;
 }
 

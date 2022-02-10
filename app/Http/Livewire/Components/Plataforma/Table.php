@@ -66,7 +66,16 @@ class Table extends Component
     public function editOpenModal()
     {
         if($this->verficarLinha()){
-            $this->emitTo('components.plataforma.formulario', 'setOpcao', $this->id_linha, array_search('editar', $this->opcao));
+            if($this->id_linha > 1){
+                $this->emitTo('components.plataforma.formulario', 'setOpcao', $this->id_linha, array_search('editar', $this->opcao));
+            }else{
+                $this->msg_toast["titulo"] = "Alerta!";
+                $this->msg_toast["information"] = "Essa opção nao pode ser alterada!";
+                $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["warning"];
+                $this->emit('plataforma.formulario.toast', $this->msg_toast);
+                $this->reset(['msg_toast']);
+                $this->id_linha = 0;
+            }
         }else{//linha não marcada
             $this->msg_toast["titulo"] = "Alerta!";
             $this->msg_toast["information"] = "Plataforma não selecionada! <br> Clique em uma plataforma!";
@@ -82,10 +91,20 @@ class Table extends Component
     public function showAlertQuestion()
     {
         if($this->verficarLinha()){
-            $this->msg_question['titulo'] = 'Atenção!';
-            $this->msg_question['information'] = 'Realmente deseja excluir esta plataforma?';
-            $this->emit('plataforma.table.questionMsg', $this->msg_question, $this->id_linha);
-            $this->id_linha = 0;
+            
+            if($this->id_linha > 1){
+                $this->msg_question['titulo'] = 'Atenção!';
+                $this->msg_question['information'] = 'Realmente deseja excluir esta plataforma?';
+                $this->emit('plataforma.table.questionMsg', $this->msg_question, $this->id_linha);
+                $this->id_linha = 0;
+            }else{
+                $this->msg_toast["titulo"] = "Alerta!";
+                $this->msg_toast["information"] = "Essa opção nao pode ser deletada!";
+                $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["warning"];
+                $this->emit('plataforma.formulario.toast', $this->msg_toast);
+                $this->reset(['msg_toast']);
+                $this->id_linha = 0;
+            }
         }else{//linha não marcada
             $this->msg_toast["titulo"] = "Alerta!";
             $this->msg_toast["information"] = "Plataforma não selecionada! <br> Clique em uma plataforma!";
@@ -107,7 +126,13 @@ class Table extends Component
             $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["success"];
             $this->emit('plataformas-reload');
             $this->emit('plataforma.formulario.toast', $this->msg_toast);
-        } catch (\Exception $e) {
+        }catch(\PDOException $e){
+            $this->msg_toast["titulo"] = "Error de deleção de relaciomento";
+            $this->msg_toast["information"] = "O valor não pode ser deletado, pois está vinculado a uma ou mais contas!";
+            $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["error"];
+            $this->emit('plataforma.formulario.toast', $this->msg_toast);
+            $this->reset(['msg_toast']);
+        }catch (\Exception $e) {
             $this->msg_toast["titulo"] = "Error!";
             $this->msg_toast["information"] = $e->getMessage();
             $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["error"];

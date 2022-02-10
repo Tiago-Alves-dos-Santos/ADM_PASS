@@ -10,4 +10,6 @@ class ContaPlataforma extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
+
 }
