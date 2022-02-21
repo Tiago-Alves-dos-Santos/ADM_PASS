@@ -102,13 +102,14 @@ class Table extends Component
     {
         try {
             $contaPlataforma = ContaPlataforma::find($id_contaPlataforma);
-            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            ContaPlataforma::where('conta_id', $contaPlataforma->conta_id)
+            ->where('plataforma_id', $contaPlataforma->plataforma_id)
+            ->forceDelete();
             Conta::where('id', $contaPlataforma->conta_id)->forceDelete();
-            Plataforma::where('id', $contaPlataforma->plataforma_id)->forceDelete();
-            ContaPlataforma::where('id', $id_contaPlataforma)->forceDelete();
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            //nao precisa deletar plataforma
+            // Plataforma::where('id', $contaPlataforma->plataforma_id)->forceDelete();
             $this->msg_toast["titulo"] = "Sucesso!";
-            $this->msg_toast["information"] = "Conta deletada permanentemente do banco!";
+            $this->msg_toast["information"] = "Plataforma desvinculada e conta deletada!";
             $this->msg_toast["opcao"] = $this->msg_toast["opcao_type"]["success"];
             $this->emit('contas-reload');
             $this->emit('conta.table.toast', $this->msg_toast);
